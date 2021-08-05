@@ -2,4 +2,36 @@
 
 *{
   margin:0 auto;
+
+}
+.navbar-brand{
+  margin-left: 100px;
+}
+
+.navbar-nav{
+  margin-right: 20px;
+}
+
+/* admin css */
+.admin {
+  display: flex;
+  margin-top: 50px;
+  /* background-color: #c3e6d1; */
+  border-radius: 5px;
+
+}
+.admin__sidebar {
+  flex: 0.3;
+  padding: 5px;
+}
+.admin__main {
+  flex: 0.7;
+}
+.admin > .admin__sidebar > .list-group > .list-group-item > a {
+  color: #1b98f5;
+  text-decoration: none;
+}
+.admin > .admin__sidebar > .list-group > .list-group-item {
+  width: 90%;
+  text-align: center;
 }

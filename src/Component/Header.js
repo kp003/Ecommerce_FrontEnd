@@ -2,23 +2,33 @@ import React from 'react'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import { isauthenticated } from './backend/Auth';
 function Header() {
+
+  const isLoggedIn = isauthenticated();
+  //console.log(isLoggedIn)
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Container>
-  <Navbar.Brand href="/">TechNova</Navbar.Brand>
+  
+  <Navbar.Brand href="/" >TechNova</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="me-auto">
+    <Nav>
       <Nav.Link href="/aboutus">About Us</Nav.Link>
       <Nav.Link href="/product">Products</Nav.Link>
-      <NavDropdown title="User Options" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Log In</NavDropdown.Item>
+      <Nav.Link href="/category">Category</Nav.Link>
+      <Nav.Link href="/admin/dashboard">Admin</Nav.Link>
+
+      <NavDropdown title="User Options" id="collasible-nav-dropdown" >
+        {!isLoggedIn &&(<>
+          <NavDropdown.Item href="/login">Log In</NavDropdown.Item>
         <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Log Out</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">About Us</NavDropdown.Item>
+        
+        </>)}
+        {isLoggedIn &&(<NavDropdown.Item href="#action/3.3">Log Out</NavDropdown.Item>)}
+        {/* //<NavDropdown.Item href="#action/3.3">Log Out</NavDropdown.Item> */}
+        {/* <NavDropdown.Divider /> */}
       </NavDropdown>
     </Nav>
     {/* <Nav>
@@ -28,9 +38,9 @@ function Header() {
       </Nav.Link>
     </Nav> */}
   </Navbar.Collapse>
-  </Container>
+ 
 </Navbar>
-           <Link to="/"><Button variant="primary">HomeButton</Button></Link> 
+           <Link to="/"></Link> 
             
         </div>
     )

@@ -1,3 +1,1 @@
-# Ecommerce_FrontEnd
-
-Creating Front-End for the Ecommerce app using REACT
+Creating Front-End for the E-commerce App using REACT
