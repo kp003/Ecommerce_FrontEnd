@@ -35,3 +35,8 @@
   width: 90%;
   text-align: center;
 }
+.product_price{
+  display: flex;
+  justify-content: space-between;
+
+}
