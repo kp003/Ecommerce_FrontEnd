@@ -1,4 +1,3 @@
-
 import React,{useEffect, useState}  from 'react'
 import { Col, Container, Form, Row,Button  } from 'react-bootstrap'
 import { createcat, getAllCategories } from '../../backend/CategoryCotroller'
@@ -15,20 +14,23 @@ function CreateProduct() {
 
         name:"",
         price:0.00,
-        decsription:"",
+        description:"",
         quantity:"",
         created_by:"",
         category:"",
+        //image:""
+
+
         
 
-    })
+    });
 
     const [resp, setResp] = useState({
       error:"",
       message:"",
       loading:false,
 
-    })
+    });
     const [cat, setCat] = useState([])
     const token = isauthenticated()
 
@@ -51,11 +53,14 @@ function CreateProduct() {
 
     const handleChange=(name)=>e=>{
         
-        setinfo({...info,[name]:e.target.value})
+      let value=name==="image"?e.target.files[0]:e.target.value
+        
+        setinfo({...info,[name]:value,created_by:isLoggedIn.username})
 
     }
 
-    const {name,price,decsription,quantity,crerated_by,category}=info;
+
+    const {name,price,description,quantity,crerated_by,category}=info;
     
 
     const{error,message,loading}=resp;
@@ -65,21 +70,19 @@ function CreateProduct() {
 
    
     const handleClick=()=>{
-        setResp({...resp,loading:true,message:"",error:""})
-        createproduct(info,isLoggedIn.message).then(res=>{
-
-            console.log(res)
-  
+      setResp({...resp,loading:true,message:"",error:""});
+      createproduct(info,isLoggedIn.message)
+      .then(res=>{
+     
           if(res.status===200){
             setResp({...resp,message:res.message,loading:false,error:""})
-  
-          }
-          else{
+            console.log("hi")
+          }else{
             setResp({...resp,loading:false,error:res.error,message:""})
           }
   
-         }).catch(err=>{console.log(err)});
-         //console.log("logged in")
+         })
+         console.log("logged in")
       }
 
     return (
@@ -115,6 +118,12 @@ function CreateProduct() {
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Product Quantity</Form.Label>
     <Form.Control type="text" placeholder="Enter Product Quantity" onChange={handleChange("quantity")} />
+  </Form.Group>
+
+  <Form.Group controlId="formFile" className="mb-3">
+    <Form.Label>Select Product Image </Form.Label>
+    <Form.Control type="file" onChange={handleChange("image")}/>
+
   </Form.Group>
 
   
